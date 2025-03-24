@@ -22,7 +22,7 @@ def main():
     global error
     global error_str
     threading_list=[]
-    version="%prog v1.1"
+    version="%prog v1.2"
     usage="%prog <options> <object>"
     p=optparse.OptionParser(usage=usage,version=version)
     p.add_option("-f","--file",dest="filename",help="指定查找文件 或者关键词")
@@ -34,12 +34,16 @@ def main():
     yx_path=r"%s"%option.directory
     now_file=os.listdir(yx_path)
     all_file_path=[]
+    if os.path.exists(yx_path):
+        print("没有找到指定目录:%s"%yx_path)
+        exit()
+    
     if num != 'Infinity':
         try:
             num=int(num)
         except:
             exit("The num must number,Please enter the number.")
-
+    
     for i in now_file:
         try:
             if os.path.isfile(yx_path+'\\'+i):
@@ -80,8 +84,7 @@ def main():
             except UnicodeEncodeError:            
                 i=i.encode('UTF-8', 'ignore').decode('UTF-8')            
                 print(i)         
-
+            
 if __name__ == "__main__":
-
     t=threading.Thread(target=main)
     t.start()
