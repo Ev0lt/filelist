@@ -1,4 +1,6 @@
 # Usage
+
+```
 Usage: filelist.py <options> <object>
 
 Options:
@@ -10,3 +12,8 @@ Options:
                         指定查找目录如果没有指定那就是当前目录
   -n NUM, --file_num=NUM
                         指定只要查找几个文件
+```
+
+# 日志
+
+解决了文件字符不可输出和使用的问题

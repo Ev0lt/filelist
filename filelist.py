@@ -1,5 +1,6 @@
 import os,optparse,threading
 all_file_path=[]
+
 def find_file_or_dir(path):
     global all_file_path
     try:
@@ -18,8 +19,10 @@ def find_file_or_dir(path):
 
 def main():
     global all_file_path
+    global error
+    global error_str
     threading_list=[]
-    version="%prog v1.0"
+    version="%prog v1.1"
     usage="%prog <options> <object>"
     p=optparse.OptionParser(usage=usage,version=version)
     p.add_option("-f","--file",dest="filename",help="指定查找文件 或者关键词")
@@ -36,6 +39,7 @@ def main():
             num=int(num)
         except:
             exit("The num must number,Please enter the number.")
+
     for i in now_file:
         try:
             if os.path.isfile(yx_path+'\\'+i):
@@ -51,17 +55,33 @@ def main():
             pass
     for i in threading_list:
         i.join()
-    all_file_path=list(filter(lambda x:x.find(filename) >=0,all_file_path))
+    if filename != None:
+        all_file_path=list(filter(lambda x:x.find(filename) >=0,all_file_path))
     if num == 'Infinity':
         for i in all_file_path:
-            print(i)
+            try:
+                print(i)
+            except UnicodeEncodeError:
+                i=i.encode('UTF-8', 'ignore').decode('UTF-8')
+                print(i)
+
     elif len(all_file_path) < num:
         for i in all_file_path:
-            print(i)
+            try:
+                print(i)
+            except UnicodeEncodeError:
+                i=i.encode('UTF-8', 'ignore').decode('UTF-8')
+                print(i)
     else:
         all_file_path=all_file_path[:num]
         for i in all_file_path:
-            print(i)
+            try:
+                print(i)            
+            except UnicodeEncodeError:            
+                i=i.encode('UTF-8', 'ignore').decode('UTF-8')            
+                print(i)         
 
 if __name__ == "__main__":
-    threading.Thread(target=main).start()
+
+    t=threading.Thread(target=main)
+    t.start()
