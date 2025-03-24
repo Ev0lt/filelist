@@ -82,7 +82,7 @@ def find(status, refind, data, filename):
 def main():
     global move
     global Dpth
-    version = "%prog v3.2.0"
+    version = "%prog v3.2.1"
     usage = "%prog <options> <object>"
     p = optparse.OptionParser(usage=usage, version=version)
     p.add_option("-f", "--file", dest="filename", help="指定查找文件 或者关键词", default="")
@@ -97,7 +97,7 @@ def main():
     p.add_option("-m","--move",dest="move",default=None,help="将查找的文件移动到指定目录")
     p.add_option("-R","--Remove",dest="Remove",action="store_true",help="将查找到的文件移除")
     p.add_option("-c",'--copy',help="将查找的文件复制到指定目录",dest="copy")
-    p.add_option("-D","--Dpth",help="查找的深度",dest="Dpth",type="int",default=1400)
+    p.add_option("-D","--Dpth",help="查找的深度",dest="Dpth",type="int")
     # p.add_option("-o", "--system", dest="system", nargs=1, help="指定查找的文件系统", action="store_const",
     #              const=["Windows", "Linux"], default=platform.system())
     (option, args) = p.parse_args()
@@ -108,7 +108,7 @@ def main():
     move = option.move
     Remove = option.Remove
     copy = option.copy
-    Dpth = option.Dpth
+    Dpth = option.Dpth if option.Dpth else Dpth
     # system = option.system
     # if system == "Windows":
     yx_path = r"%s" % option.directory
@@ -119,7 +119,8 @@ def main():
         s = False
 
     if move:
-        Dpth = 1
+        if not Dpth:
+            Dpth = 1
         if not os.path.exists(move):
             try:
                 os.makedirs(move)
