@@ -8,6 +8,8 @@ Options:
   -h, --help            查看帮助信息
   -f FILENAME, --file=FILENAME
                         指定查找文件 或者关键词
+  -s, --status          指定查找在文件名或者整体路径中
+  -r, --refind          re寻找开关，开启后可以在filename中添加正则查找的功能
   -d DIRECTORY, --directory=DIRECTORY
                         指定查找目录如果没有指定那就是当前目录
   -n NUM, --file_num=NUM
@@ -16,4 +18,4 @@ Options:
 
 # 日志
 
-增加了指定文件目录不存在的异常处理
+更改返回模式，简洁代码
