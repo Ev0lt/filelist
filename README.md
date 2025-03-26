@@ -18,8 +18,11 @@ Options:
   -R, --Remove          将查找到的文件移除
   -c COPY, --copy=COPY  将查找的文件复制到指定目录
   -D DPTH, --Dpth=DPTH  查找的深度
+  --ftype               只输出文件
+  --dtype               只输出目录
+  -t TYPE, --type=TYPE  输出文件后缀的类型，使用这个选项会默认开启-ft
 ```
 
 # 日志
 
-改了个小bug
+增加四个功能，只输出文件，只输出目录和更优美的Ctrl+c
